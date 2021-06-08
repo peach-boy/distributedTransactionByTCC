@@ -1,5 +1,6 @@
 package com.wxt.payment.service.processor;
 
+import com.wxt.payment.model.PayContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -10,22 +11,25 @@ import org.springframework.stereotype.Component;
  * @Description:营销系统
  */
 @Component
-public class MarketPayProcessor implements PayProcessor {
+public class MarketPayProcessor extends AbstractPayProcessor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MarketPayProcessor.class);
 
     @Override
-    public void tryPay() {
-        LOGGER.info("tryPay------{}",this.getClass().getName());
+    public Boolean doTryPay(PayContext payContext) {
+
+        return true;
     }
 
     @Override
-    public void comfirmPay() {
-        LOGGER.info("comfirmPay------{}",this.getClass().getName());
+    public Boolean doComfirmPay(PayContext payContext) {
+
+        return true;
     }
 
     @Override
-    public void cancelPay() {
-        LOGGER.info("cancelPay------{}",this.getClass().getName());
+    public Boolean doCancelPay(PayContext payContext) {
+
+        return true;
     }
 }
