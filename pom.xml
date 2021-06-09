@@ -11,16 +11,22 @@
     <relativePath/> <!-- lookup parent from repository -->
   </parent>
 
-
   <groupId>com.wxt</groupId>
   <artifactId>distributedTransaction</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
+
   <modules>
     <module>payment</module>
     <module>account</module>
     <module>market</module>
     <module>limit</module>
+    <module>common</module>
+    <module>seller-settlement</module>
   </modules>
+
+  <dependencies>
+
+  </dependencies>
 
 </project>
