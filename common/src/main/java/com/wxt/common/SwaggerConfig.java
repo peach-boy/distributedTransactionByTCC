@@ -1,4 +1,4 @@
-package com.wxt.payment.config;
+package com.wxt.common;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,7 +10,7 @@ import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
 
 /**
- * @Description: TODO
+ * @Description: swagger配置
  * @Auther: ThomasWu
  * @Date: 2019/8/29 20:57
  * @Email:1414924381@qq.com
@@ -22,7 +22,7 @@ public class SwaggerConfig {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo())
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.wxt.payment.web"))
+                .apis(RequestHandlerSelectors.basePackage("com.wxt.*.web"))
                 .paths(PathSelectors.any())
                 .build();
     }
