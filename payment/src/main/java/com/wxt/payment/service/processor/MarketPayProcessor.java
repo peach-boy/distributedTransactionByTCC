@@ -1,8 +1,11 @@
 package com.wxt.payment.service.processor;
 
+import com.wxt.common.api.MarketService;
+import com.wxt.common.model.MarketPayRequest;
 import com.wxt.payment.model.PayContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,20 +18,29 @@ public class MarketPayProcessor extends AbstractPayProcessor {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(MarketPayProcessor.class);
 
+    @Autowired
+    private MarketService marketService;
+
     @Override
     public Boolean doTryPay(PayContext payContext) {
+        MarketPayRequest request = new MarketPayRequest();
+        request.setTradeNo(payContext.getOrderNo());
+        request.setTradeAmount(payContext.getAmount());
+        marketService.tryPay(request);
 
         return true;
     }
 
     @Override
     public Boolean doComfirmPay(PayContext payContext) {
+        marketService.comfirmPay(payContext.getOrderNo());
 
         return true;
     }
 
     @Override
     public Boolean doCancelPay(PayContext payContext) {
+        marketService.cancelPay(payContext.getOrderNo());
 
         return true;
     }

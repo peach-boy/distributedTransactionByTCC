@@ -1,21 +1,36 @@
 package com.wxt.limit.web;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.wxt.common.model.LimitPayRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 /**
  * @Auther: ThomasWu
  * @Date: 2021/6/9 15:54
- * @Description:额度交易相关
+ * @Description:账户交易相关
  */
 @RestController
 @RequestMapping(value = "/limit")
 public class TradeController {
 
-    @PostMapping(value = "/pay")
-    public boolean consume() {
+    private static final Logger LOGGER = LoggerFactory.getLogger(TradeController.class);
 
+
+    @PostMapping(value = "/tryPay")
+    public boolean tryPay(@RequestBody LimitPayRequest request) {
+        return Boolean.TRUE;
+    }
+
+    @PostMapping(value = "/comfirmPay")
+    public boolean comfirmPay(@RequestParam String tradeNo) {
+        return Boolean.TRUE;
+    }
+
+    @PostMapping(value = "/cancelPay")
+    public boolean cancelPay(@RequestParam String tradeNo) {
         return Boolean.TRUE;
     }
 }
