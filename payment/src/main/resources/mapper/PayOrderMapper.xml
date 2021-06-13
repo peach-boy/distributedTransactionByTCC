@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxt.payment.domain.mapper.PayOrderMapper">
+    <sql id="columns">
+        userId,appId,assetCode,assetContent,tradeAmount,outTradeNo,payOrderNo,payStatus,remark
+    </sql>
+
+    <insert id="insert" parameterType="com.wxt.payment.domain.entity.PayOrderDO" keyProperty="id"
+            useGeneratedKeys="true">
+        insert into pay_order
+        (userId,appId,assetCode,assetContent,tradeAmount,outTradeNo,payOrderNo,payStatus,remark)
+        values
+        (#{userId},#{appId},#{assetCode},#{assetContent},#{tradeAmount},#{outTradeNo},#{payOrderNo},#{payStatus},#{remark})
+    </insert>
+
+    <update id="updateStatus">
+        update pay_order
+        set payStatus = #{newStatus}
+        where outTradeNo = #{outTradeNo} and payStatus=#{oldStatus}
+    </update>
+
+    <select id="getByOutTradeNo" resultType="com.wxt.payment.domain.entity.PayOrderDO">
+        SELECT
+        <include refid="columns"/>
+        FROM
+        pay_order
+        WHERE
+        outTradeNo=#{outTradeNo}
+    </select>
+
+</mapper>

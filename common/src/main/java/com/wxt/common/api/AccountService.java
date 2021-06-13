@@ -19,8 +19,8 @@ public interface AccountService {
     Boolean tryPay(AccountPayReqeust reqeust);
 
     @RequestLine("POST /account/comfirmPay")
-    Boolean comfirmPay(@Param("tradeNo") String tradeNo);
+    Boolean comfirmPay(AccountPayReqeust reqeust);
 
     @RequestLine("POST /account/cancelPay")
-    Boolean cancelPay(@Param("tradeNo") String tradeNo);
+    Boolean cancelPay(AccountPayReqeust reqeust);
 }

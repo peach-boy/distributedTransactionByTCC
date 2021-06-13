@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * @Date: 2021/6/12 18:28
  * @Email:xiantao.wu@guanaitong.com
  */
-public class AccountPayReqeust {
+public class AccountPayReqeust extends BasePayRequest {
     @NotNull
     private String tradeNo;
     @NotNull

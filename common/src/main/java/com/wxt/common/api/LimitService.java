@@ -12,15 +12,15 @@ import feign.RequestLine;
  * @Date: 2021/6/8 21:51
  * @Email:xiantao.wu@guanaitong.com
  */
+@Headers("Content-Type: application/json")
 public interface LimitService {
 
     @RequestLine("POST /limit/tryPay")
-    @Headers("Content-Type: application/json")
     Boolean tryPay(LimitPayRequest request);
 
     @RequestLine("POST /limit/comfirmPay")
-    Boolean comfirmPay(@Param("tradeNo") String tradeNo);
+    Boolean comfirmPay(LimitPayRequest request);
 
     @RequestLine("POST /limit/cancelPay")
-    Boolean cancelPay(@Param("tradeNo") String tradeNo);
+    Boolean cancelPay(LimitPayRequest request);
 }

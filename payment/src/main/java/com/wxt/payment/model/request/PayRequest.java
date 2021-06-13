@@ -10,42 +10,86 @@ import java.math.BigDecimal;
  * @Description:
  */
 public class PayRequest {
-    private BigDecimal amount;
+    private String userId;
 
-    private String orderNo;
+    private String appId;
 
-    private String sceneCode;
+    private BigDecimal orderAmount;
+
+    private String outTradeNo;
+
+    private String assetCode;
+
+    private String assetContent;
+
+    private String remark;
 
 
     public PayContext convertToPayContext() {
         PayContext payContext = new PayContext();
-        payContext.setAmount(this.amount);
-        payContext.setOrderNo(this.orderNo);
-        payContext.setSceneCode(this.sceneCode);
+        payContext.setAppId(this.appId);
+        payContext.setUserId(this.userId);
+        payContext.setAssetCode(this.assetCode);
+        payContext.setAssetContent(this.getAssetContent());
+        payContext.setOrderAmount(this.orderAmount);
+        payContext.setOutTradeNo(this.outTradeNo);
+        payContext.setRemark(this.remark);
         return payContext;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public String getOrderNo() {
-        return orderNo;
+    public String getAppId() {
+        return appId;
     }
 
-    public void setOrderNo(String orderNo) {
-        this.orderNo = orderNo;
+    public void setAppId(String appId) {
+        this.appId = appId;
     }
 
-    public String getSceneCode() {
-        return sceneCode;
+    public BigDecimal getOrderAmount() {
+        return orderAmount;
     }
 
-    public void setSceneCode(String sceneCode) {
-        this.sceneCode = sceneCode;
+    public void setOrderAmount(BigDecimal orderAmount) {
+        this.orderAmount = orderAmount;
+    }
+
+    public String getOutTradeNo() {
+        return outTradeNo;
+    }
+
+    public void setOutTradeNo(String outTradeNo) {
+        this.outTradeNo = outTradeNo;
+    }
+
+    public String getAssetCode() {
+        return assetCode;
+    }
+
+    public void setAssetCode(String assetCode) {
+        this.assetCode = assetCode;
+    }
+
+    public String getAssetContent() {
+        return assetContent;
+    }
+
+    public void setAssetContent(String assetContent) {
+        this.assetContent = assetContent;
+    }
+
+    public String getRemark() {
+        return remark;
+    }
+
+    public void setRemark(String remark) {
+        this.remark = remark;
     }
 }

@@ -24,8 +24,8 @@ public class MarketPayProcessor extends AbstractPayProcessor {
     @Override
     public Boolean doTryPay(PayContext payContext) {
         MarketPayRequest request = new MarketPayRequest();
-        request.setTradeNo(payContext.getOrderNo());
-        request.setTradeAmount(payContext.getAmount());
+        request.setTradeNo(payContext.getOutTradeNo());
+        request.setTradeAmount(payContext.getOrderAmount());
         marketService.tryPay(request);
 
         return true;
@@ -33,14 +33,20 @@ public class MarketPayProcessor extends AbstractPayProcessor {
 
     @Override
     public Boolean doComfirmPay(PayContext payContext) {
-        marketService.comfirmPay(payContext.getOrderNo());
+        MarketPayRequest request = new MarketPayRequest();
+        request.setTradeNo(payContext.getOutTradeNo());
+        request.setTradeAmount(payContext.getOrderAmount());
+        marketService.comfirmPay(request);
 
         return true;
     }
 
     @Override
     public Boolean doCancelPay(PayContext payContext) {
-        marketService.cancelPay(payContext.getOrderNo());
+        MarketPayRequest request = new MarketPayRequest();
+        request.setTradeNo(payContext.getOutTradeNo());
+        request.setTradeAmount(payContext.getOrderAmount());
+        marketService.cancelPay(request);
 
         return true;
     }

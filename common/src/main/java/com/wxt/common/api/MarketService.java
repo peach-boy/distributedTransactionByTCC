@@ -12,15 +12,15 @@ import feign.RequestLine;
  * @Date: 2021/6/8 21:51
  * @Email:xiantao.wu@guanaitong.com
  */
+@Headers("Content-Type: application/json")
 public interface MarketService {
 
     @RequestLine("POST /market/tryPay")
-    @Headers("Content-Type: application/json")
     Boolean tryPay(MarketPayRequest request);
 
     @RequestLine("POST /market/comfirmPay")
-    Boolean comfirmPay(@Param("tradeNo") String tradeNo);
+    Boolean comfirmPay(MarketPayRequest request);
 
     @RequestLine("POST /market/cancelPay")
-    Boolean cancelPay(@Param("tradeNo") String tradeNo);
+    Boolean cancelPay(MarketPayRequest request);
 }

@@ -24,8 +24,8 @@ public class AccountPayProcessor extends AbstractPayProcessor {
     @Override
     public Boolean doTryPay(PayContext payContext) {
         AccountPayReqeust accountPayReqeust=new AccountPayReqeust();
-        accountPayReqeust.setTradeAmount(payContext.getAmount());
-        accountPayReqeust.setTradeNo(payContext.getOrderNo());
+        accountPayReqeust.setTradeAmount(payContext.getOrderAmount());
+        accountPayReqeust.setTradeNo(payContext.getOutTradeNo());
         accountService.tryPay(accountPayReqeust);
 
         return true;
@@ -33,14 +33,20 @@ public class AccountPayProcessor extends AbstractPayProcessor {
 
     @Override
     public Boolean doComfirmPay(PayContext payContext) {
-        accountService.comfirmPay(payContext.getOrderNo());
+        AccountPayReqeust accountPayReqeust=new AccountPayReqeust();
+        accountPayReqeust.setTradeAmount(payContext.getOrderAmount());
+        accountPayReqeust.setTradeNo(payContext.getOutTradeNo());
+        accountService.comfirmPay(accountPayReqeust);
 
         return true;
     }
 
     @Override
     public Boolean doCancelPay(PayContext payContext) {
-        accountService.cancelPay(payContext.getOrderNo());
+        AccountPayReqeust accountPayReqeust=new AccountPayReqeust();
+        accountPayReqeust.setTradeAmount(payContext.getOrderAmount());
+        accountPayReqeust.setTradeNo(payContext.getOutTradeNo());
+        accountService.cancelPay(accountPayReqeust);
 
         return true;
     }

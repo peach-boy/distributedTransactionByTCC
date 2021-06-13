@@ -1,5 +1,7 @@
 package com.wxt.payment.web;
 
+import com.wxt.common.model.ApiResponse;
+import com.wxt.payment.facade.PayServiceFacade;
 import com.wxt.payment.model.request.PayRequest;
 import com.wxt.payment.service.PayService;
 import io.swagger.annotations.Api;
@@ -18,11 +20,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class PayController {
 
     @Autowired
-    private PayService payService;
+    private PayServiceFacade payServiceFacade;
 
     @ApiOperation(value = "支付", notes = "支付")
     @PostMapping(value = "/pay")
-    public Boolean pay(PayRequest payRequest) {
-        return payService.pay(payRequest.convertToPayContext());
+    public ApiResponse<String> pay(PayRequest payRequest) {
+        String payOrderNo = payServiceFacade.pay(payRequest.convertToPayContext());
+        return ApiResponse.success(payOrderNo);
     }
 }

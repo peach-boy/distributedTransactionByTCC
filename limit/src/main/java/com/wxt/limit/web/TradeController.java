@@ -25,12 +25,12 @@ public class TradeController {
     }
 
     @PostMapping(value = "/comfirmPay")
-    public boolean comfirmPay(@RequestParam String tradeNo) {
+    public boolean comfirmPay(@RequestBody LimitPayRequest request) {
         return Boolean.TRUE;
     }
 
     @PostMapping(value = "/cancelPay")
-    public boolean cancelPay(@RequestParam String tradeNo) {
+    public boolean cancelPay(@RequestBody LimitPayRequest request) {
         return Boolean.TRUE;
     }
 }

@@ -24,21 +24,27 @@ public class LimitPayProcessor extends AbstractPayProcessor {
     @Override
     public Boolean doTryPay(PayContext payContext) {
         LimitPayRequest request = new LimitPayRequest();
-        request.setTradeNo(payContext.getOrderNo());
-        request.setTradeAmount(payContext.getAmount());
+        request.setTradeNo(payContext.getOutTradeNo());
+        request.setTradeAmount(payContext.getOrderAmount());
         limitService.tryPay(request);
         return true;
     }
 
     @Override
     public Boolean doComfirmPay(PayContext payContext) {
-        limitService.comfirmPay(payContext.getOrderNo());
+        LimitPayRequest request = new LimitPayRequest();
+        request.setTradeNo(payContext.getOutTradeNo());
+        request.setTradeAmount(payContext.getOrderAmount());
+        limitService.comfirmPay(request);
         return true;
     }
 
     @Override
     public Boolean doCancelPay(PayContext payContext) {
-        limitService.cancelPay(payContext.getOrderNo());
+        LimitPayRequest request = new LimitPayRequest();
+        request.setTradeNo(payContext.getOutTradeNo());
+        request.setTradeAmount(payContext.getOrderAmount());
+        limitService.cancelPay(request);
         return true;
     }
 }

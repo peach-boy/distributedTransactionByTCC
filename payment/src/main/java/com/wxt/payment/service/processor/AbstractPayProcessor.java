@@ -1,5 +1,7 @@
 package com.wxt.payment.service.processor;
 
+import com.wxt.common.constant.ErrorCode;
+import com.wxt.common.exception.BusinessRuntimeException;
 import com.wxt.payment.model.PayContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,7 +27,7 @@ public abstract class AbstractPayProcessor implements PayProcessor {
                 retry(retryAction);
             } else {
                 LOGGER.info("重试:{}:已达上限，请关注异常单", retryAction.getClass().getName());
-                throw new RuntimeException();
+                throw new BusinessRuntimeException(ErrorCode.SYSTEM_ERROR);
             }
         }
     }

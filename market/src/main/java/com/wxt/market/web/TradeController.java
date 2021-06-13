@@ -1,6 +1,7 @@
 package com.wxt.market.web;
 
-import com.alibaba.fastjson.JSON;
+import com.wxt.common.constant.ErrorCode;
+import com.wxt.common.exception.BusinessRuntimeException;
 import com.wxt.common.model.MarketPayRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,16 +23,16 @@ public class TradeController {
 
     @PostMapping(value = "/tryPay")
     public boolean tryPay(@RequestBody MarketPayRequest request) {
-        return Boolean.TRUE;
+        throw  new BusinessRuntimeException(ErrorCode.SYSTEM_ERROR);
     }
 
     @PostMapping(value = "/comfirmPay")
-    public boolean comfirmPay(@RequestParam String tradeNo) {
+    public boolean comfirmPay(@RequestBody MarketPayRequest request) {
         return Boolean.TRUE;
     }
 
     @PostMapping(value = "/cancelPay")
-    public boolean cancelPay(@RequestParam String tradeNo) {
+    public boolean cancelPay(@RequestBody MarketPayRequest request) {
         return Boolean.TRUE;
     }
 }

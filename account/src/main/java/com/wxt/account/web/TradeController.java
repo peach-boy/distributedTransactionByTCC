@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
@@ -30,14 +31,12 @@ public class TradeController {
     }
 
     @PostMapping(value = "/comfirmPay")
-    public boolean comfirmPay(@RequestParam String tradeNo) {
-        LOGGER.info("account_comfirmPay:{}", tradeNo);
+    public boolean comfirmPay(@RequestBody AccountPayReqeust reqeust) {
         return Boolean.TRUE;
     }
 
     @PostMapping(value = "/cancelPay")
-    public boolean cancelPay(@RequestParam String tradeNo) {
-        LOGGER.info("account_cancelPay:{}", tradeNo);
+    public boolean cancelPay(@RequestBody AccountPayReqeust reqeust) {
         return Boolean.TRUE;
     }
 }
