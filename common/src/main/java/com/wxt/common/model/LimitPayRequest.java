@@ -7,7 +7,7 @@ import java.math.BigDecimal;
  * @Description: TODO
  * @Auther: xiantao.wu
  * @Date: 2021/6/12 21:37
- * @Email:xiantao.wu@guanaitong.com
+ * @Email:1414924381@qq.com
  */
 public class LimitPayRequest extends BasePayRequest {
     @NotNull

@@ -10,7 +10,7 @@ import org.apache.ibatis.annotations.Param;
  * @Description: TODO
  * @Auther: xiantao.wu
  * @Date: 2021/6/13 13:41
- * @Email:xiantao.wu@guanaitong.com
+ * @Email:1414924381@qq.com
  */
 @Mapper
 public interface PayOrderMapper {

@@ -1,4 +1,4 @@
-package com.wxt.payment.web;
+package com.wxt.payment.web.aspect;
 
 import com.wxt.common.exception.BusinessRuntimeException;
 import com.wxt.common.model.ApiResponse;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- * @Description: TODO
+ * @Description: 异常处理器
  * @Auther: xiantao.wu
  * @Date: 2021/6/13 15:24
- * @Email:xiantao.wu@guanaitong.com
+ * @Email:1414924381@qq.com
  */
 @ControllerAdvice
 public class ExceptionHandler {
@@ -21,7 +21,7 @@ public class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(BusinessRuntimeException.class)
     @ResponseBody
     public ApiResponse handleBusinessException(BusinessRuntimeException e) {
-        LOGGER.error(e.toString());
+        LOGGER.error("error:{}:{}",e.getErrorCode(),e.getErrorMsg(),e);
         String message = e.getErrorMsg();
         return ApiResponse.fail(e.getErrorCode(), message);
     }

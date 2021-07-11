@@ -1,5 +1,7 @@
 package com.wxt.payment.web;
 
+import com.wxt.common.constant.ErrorCode;
+import com.wxt.common.constant.RedisLock;
 import com.wxt.common.model.ApiResponse;
 import com.wxt.payment.facade.PayServiceFacade;
 import com.wxt.payment.model.request.PayRequest;
@@ -24,6 +26,7 @@ public class PayController {
 
     @ApiOperation(value = "支付", notes = "支付")
     @PostMapping(value = "/pay")
+    @RedisLock(keyPrefix = "pay_",expire = 15,unLockrroCode = ErrorCode.ORDER_IS_PENDDING)
     public ApiResponse<String> pay(PayRequest payRequest) {
         String payOrderNo = payServiceFacade.pay(payRequest.convertToPayContext());
         return ApiResponse.success(payOrderNo);

@@ -5,13 +5,18 @@ import com.wxt.common.constant.PayStatusEnum;
 import com.wxt.common.exception.BusinessRuntimeException;
 import com.wxt.payment.domain.entity.PayOrderDO;
 import com.wxt.payment.domain.mapper.PayOrderMapper;
+import com.wxt.payment.manager.RedisManager;
 import com.wxt.payment.model.PayContext;
 import com.wxt.payment.service.PayService;
 import com.wxt.payment.service.helper.OrderNoGenerateHelper;
 import com.wxt.payment.service.scene.AbstractScene;
 import com.wxt.payment.service.scene.SceneRouter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * @Auther: ThomasWu
@@ -27,17 +32,17 @@ public class PayServiceImpl implements PayService {
     @Autowired
     private OrderNoGenerateHelper orderNoGenerateHelper;
 
+    @Autowired
+    private RedisManager redisManager;
+
     @Override
     public void checkPay(PayContext context) {
-        //分布式锁，防重复支付 TODO
-
+        //TODO
+        // 1.加解密
         PayOrderDO payOrder = payOrderMapper.getByOutTradeNo(context.getOutTradeNo());
         if (payOrder != null) {
             throw new BusinessRuntimeException(ErrorCode.ALREADY_PAY);
         }
-
-        //验签 TODO
-
     }
 
     @Override
@@ -68,13 +73,18 @@ public class PayServiceImpl implements PayService {
             throw new BusinessRuntimeException(ErrorCode.PAY_FAIL);
         }
 
-
         return Boolean.TRUE;
     }
 
     @Override
+    @Transactional
     public Boolean postPay(PayContext context) {
         payOrderMapper.updateStatus(context.getOutTradeNo(), PayStatusEnum.PAY_SUCCESS.getStatus(), PayStatusEnum.PAYING.getStatus());
+
+        //TODO
+        // 更新订单成功状态
+        // 落本地消息表，异步发mq
+        // 异步线程通知外部应用
         return null;
     }
 }

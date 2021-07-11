@@ -10,7 +10,7 @@ import feign.RequestLine;
  * @Description: 账户服务
  * @Auther: xiantao.wu
  * @Date: 2021/6/8 21:51
- * @Email:xiantao.wu@guanaitong.com
+ * @Email:1414924381@qq.com
  */
 @Headers("Content-Type: application/json")
 public interface AccountService {

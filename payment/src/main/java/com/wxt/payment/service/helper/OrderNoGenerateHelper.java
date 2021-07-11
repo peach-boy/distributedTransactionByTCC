@@ -9,7 +9,7 @@ import java.util.UUID;
  * @Description: TODO
  * @Auther: xiantao.wu
  * @Date: 2021/6/13 14:55
- * @Email:xiantao.wu@guanaitong.com
+ * @Email:1414924381@qq.com
  */
 @Component
 public class OrderNoGenerateHelper {

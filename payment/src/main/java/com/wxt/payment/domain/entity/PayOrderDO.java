@@ -4,10 +4,10 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * @Description: TODO
+ * @Description: 支付单
  * @Auther: xiantao.wu
  * @Date: 2021/6/13 13:41
- * @Email:xiantao.wu@guanaitong.com
+ * @Email:1414924381@qq.com
  */
 public class PayOrderDO extends BaseDO {
 

@@ -4,7 +4,7 @@ package com.wxt.common.constant;
  * @Description: TODO
  * @Auther: xiantao.wu
  * @Date: 2021/6/13 14:50
- * @Email:xiantao.wu@guanaitong.com
+ * @Email:1414924381@qq.com
  */
 public enum PayStatusEnum {
     WAIT_PAY(1, "待支付"),

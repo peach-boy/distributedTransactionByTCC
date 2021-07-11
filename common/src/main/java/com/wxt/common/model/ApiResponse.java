@@ -6,7 +6,7 @@ import com.wxt.common.constant.ErrorCode;
  * @Description: TODO
  * @Auther: xiantao.wu
  * @Date: 2021/6/13 15:10
- * @Email:xiantao.wu@guanaitong.com
+ * @Email:1414924381@qq.com
  */
 public class ApiResponse<T> {
     private final static String succesMsg = "success";

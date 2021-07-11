@@ -2,11 +2,12 @@ package com.wxt.common.exception;
 
 import com.wxt.common.constant.ErrorCode;
 
+
 /**
  * @Description: TODO
  * @Auther: xiantao.wu
  * @Date: 2021/6/13 15:26
- * @Email:xiantao.wu@guanaitong.com
+ * @Email:1414924381@qq.com
  */
 public class BusinessRuntimeException extends RuntimeException {
 

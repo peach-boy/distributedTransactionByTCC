@@ -14,7 +14,7 @@ import org.springframework.context.annotation.Configuration;
  * @Description: TODO
  * @Auther: xiantao.wu
  * @Date: 2021/6/12 16:38
- * @Email:xiantao.wu@guanaitong.com
+ * @Email:1414924381@qq.com
  */
 @Configuration
 public class FeignConfig {

@@ -23,7 +23,7 @@ public class TradeController {
 
     @PostMapping(value = "/tryPay")
     public boolean tryPay(@RequestBody MarketPayRequest request) {
-        throw  new BusinessRuntimeException(ErrorCode.SYSTEM_ERROR);
+        return Boolean.TRUE;
     }
 
     @PostMapping(value = "/comfirmPay")
