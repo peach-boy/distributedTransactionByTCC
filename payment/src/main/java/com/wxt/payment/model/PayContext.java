@@ -1,5 +1,7 @@
 package com.wxt.payment.model;
 
+import com.wxt.payment.manager.DLockedBizBaseContext;
+
 import java.math.BigDecimal;
 
 /**
@@ -7,7 +9,7 @@ import java.math.BigDecimal;
  * @Date: 2021/6/6 13:53
  * @Description:
  */
-public class PayContext {
+public class PayContext extends DLockedBizBaseContext {
     private String userId;
 
     private String appId;
@@ -21,6 +23,10 @@ public class PayContext {
     private String assetContent;
 
     private String remark;
+
+    private String payOrderNo;
+
+
 
     public String getUserId() {
         return userId;
@@ -76,5 +82,13 @@ public class PayContext {
 
     public void setRemark(String remark) {
         this.remark = remark;
+    }
+
+    public String getPayOrderNo() {
+        return payOrderNo;
+    }
+
+    public void setPayOrderNo(String payOrderNo) {
+        this.payOrderNo = payOrderNo;
     }
 }

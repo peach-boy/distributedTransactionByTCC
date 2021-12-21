@@ -35,24 +35,32 @@
         </dependency>
 
         <dependency>
+            <groupId>com.alibaba.boot</groupId>
+            <artifactId>nacos-config-spring-boot-starter</artifactId>
+            <version>0.2.0</version>
+        </dependency>
+
+        <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
-            <!-- 1.5的版本默认采用的连接池技术是jedis，2.0以上版本默认连接池是lettuce, 因为此次是采用jedis，所以需要排除lettuce的jar -->
             <exclusions>
-                <exclusion>
-                    <groupId>redis.clients</groupId>
-                    <artifactId>jedis</artifactId>
-                </exclusion>
                 <exclusion>
                     <groupId>io.lettuce</groupId>
                     <artifactId>lettuce-core</artifactId>
                 </exclusion>
             </exclusions>
         </dependency>
-        <!-- jedis客户端 -->
+        <!-- 引入Jedis客户端依赖 -->
         <dependency>
             <groupId>redis.clients</groupId>
             <artifactId>jedis</artifactId>
+            <version>2.9.1</version>
+        </dependency>
+        <!-- 引入Redisson依赖 -->
+        <dependency>
+            <groupId>org.redisson</groupId>
+            <artifactId>redisson-spring-boot-starter</artifactId>
+            <version>3.12.5</version>
         </dependency>
 
         <dependency>

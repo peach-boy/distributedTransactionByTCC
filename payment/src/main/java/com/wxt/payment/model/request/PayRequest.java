@@ -1,7 +1,10 @@
 package com.wxt.payment.model.request;
 
 import com.wxt.payment.model.PayContext;
+import io.swagger.annotations.ApiModelProperty;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -10,18 +13,31 @@ import java.math.BigDecimal;
  * @Description:
  */
 public class PayRequest {
+    @ApiModelProperty(value = "用户ID")
+    @NotBlank
     private String userId;
 
+    @ApiModelProperty(value = "应用ID")
+    @NotBlank
     private String appId;
 
+    @ApiModelProperty(value = "订单金额")
+    @NotNull
     private BigDecimal orderAmount;
 
+    @ApiModelProperty(value = "外部订单号")
+    @NotBlank
     private String outTradeNo;
 
+    @ApiModelProperty(value = "资产类型")
+    @NotBlank
     private String assetCode;
 
+    @ApiModelProperty(value = "资产编号")
+    @NotBlank
     private String assetContent;
 
+    @NotBlank
     private String remark;
 
 
@@ -34,6 +50,7 @@ public class PayRequest {
         payContext.setOrderAmount(this.orderAmount);
         payContext.setOutTradeNo(this.outTradeNo);
         payContext.setRemark(this.remark);
+        payContext.setLockKey(this.outTradeNo);
         return payContext;
     }
 

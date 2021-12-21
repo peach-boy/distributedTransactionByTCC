@@ -5,18 +5,16 @@ import com.wxt.common.constant.PayStatusEnum;
 import com.wxt.common.exception.BusinessRuntimeException;
 import com.wxt.payment.domain.entity.PayOrderDO;
 import com.wxt.payment.domain.mapper.PayOrderMapper;
-import com.wxt.payment.manager.RedisManager;
 import com.wxt.payment.model.PayContext;
+import com.wxt.payment.model.response.QueryPayStatusResponse;
 import com.wxt.payment.service.PayService;
 import com.wxt.payment.service.helper.OrderNoGenerateHelper;
-import com.wxt.payment.service.scene.AbstractScene;
 import com.wxt.payment.service.scene.SceneRouter;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * @Auther: ThomasWu
@@ -26,19 +24,17 @@ import java.util.concurrent.TimeUnit;
 @Service
 public class PayServiceImpl implements PayService {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(PayService.class);
+
+
     @Autowired
     private PayOrderMapper payOrderMapper;
 
     @Autowired
     private OrderNoGenerateHelper orderNoGenerateHelper;
 
-    @Autowired
-    private RedisManager redisManager;
-
     @Override
     public void checkPay(PayContext context) {
-        //TODO
-        // 1.加解密
         PayOrderDO payOrder = payOrderMapper.getByOutTradeNo(context.getOutTradeNo());
         if (payOrder != null) {
             throw new BusinessRuntimeException(ErrorCode.ALREADY_PAY);
@@ -46,7 +42,7 @@ public class PayServiceImpl implements PayService {
     }
 
     @Override
-    public String prePay(PayContext context) {
+    public Boolean prePay(PayContext context) {
 
         PayOrderDO payOrderDO = new PayOrderDO();
         payOrderDO.setAppId(context.getAppId());
@@ -60,7 +56,8 @@ public class PayServiceImpl implements PayService {
         payOrderDO.setTradeAmount(context.getOrderAmount());
         payOrderMapper.insert(payOrderDO);
 
-        return payOrderDO.getPayOrderNo();
+        context.setPayOrderNo(payOrderDO.getPayOrderNo());
+        return Boolean.TRUE;
     }
 
     @Override
@@ -81,10 +78,24 @@ public class PayServiceImpl implements PayService {
     public Boolean postPay(PayContext context) {
         payOrderMapper.updateStatus(context.getOutTradeNo(), PayStatusEnum.PAY_SUCCESS.getStatus(), PayStatusEnum.PAYING.getStatus());
 
-        //TODO
-        // 更新订单成功状态
+        // TODO
         // 落本地消息表，异步发mq
         // 异步线程通知外部应用
         return null;
+    }
+
+    @Override
+    public QueryPayStatusResponse queryPayStatus(String outerTradeNo) {
+        PayOrderDO payOrderDO = payOrderMapper.getByOutTradeNo(outerTradeNo);
+        if (payOrderDO==null){
+            throw new BusinessRuntimeException(ErrorCode.PAY_ORDER_NOT_EXSIT);
+        }
+
+        QueryPayStatusResponse response=new QueryPayStatusResponse();
+        response.setOuterTradeNo(outerTradeNo);
+        response.setPayOrderNo(payOrderDO.getPayOrderNo());
+        response.setTradeAmount(payOrderDO.getTradeAmount());
+        response.setPayStatus(payOrderDO.getPayStatus());
+        return response;
     }
 }

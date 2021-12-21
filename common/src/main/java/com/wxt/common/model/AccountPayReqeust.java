@@ -1,6 +1,5 @@
 package com.wxt.common.model;
 
-import javax.validation.constraints.NotNull;
 import java.math.BigDecimal;
 
 /**
@@ -10,9 +9,7 @@ import java.math.BigDecimal;
  * @Email:1414924381@qq.com
  */
 public class AccountPayReqeust extends BasePayRequest {
-    @NotNull
     private String tradeNo;
-    @NotNull
     private BigDecimal tradeAmount;
 
     public String getTradeNo() {

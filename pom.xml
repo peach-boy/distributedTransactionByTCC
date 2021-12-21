@@ -12,7 +12,7 @@
   </parent>
 
   <groupId>com.wxt</groupId>
-  <artifactId>distributedTransaction</artifactId>
+  <artifactId>paymentCenterExample</artifactId>
   <packaging>pom</packaging>
   <version>1.0-SNAPSHOT</version>
 
