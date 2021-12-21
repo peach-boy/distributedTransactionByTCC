@@ -1,4 +1,4 @@
-# distributedTransactionByTCC
+# paymentCenterExample
 
 ## 实现
 1. 基于TCC实现的分布式事务 doing
