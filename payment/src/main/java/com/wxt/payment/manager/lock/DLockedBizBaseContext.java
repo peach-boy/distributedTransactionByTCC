@@ -1,4 +1,4 @@
-package com.wxt.payment.manager;
+package com.wxt.payment.manager.lock;
 
 /**
  * 分布式锁业务体，入参基类

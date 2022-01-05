@@ -18,4 +18,5 @@ public class OrderNoGenerateHelper {
         UUID uuid = UUID.randomUUID();
         return "P" + System.currentTimeMillis() + uuid.toString();
     }
+
 }

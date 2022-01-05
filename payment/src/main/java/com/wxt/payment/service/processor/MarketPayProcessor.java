@@ -27,7 +27,6 @@ public class MarketPayProcessor extends AbstractPayProcessor {
         request.setTradeNo(payContext.getOutTradeNo());
         request.setTradeAmount(payContext.getOrderAmount());
         marketService.tryPay(request);
-
         return true;
     }
 
@@ -37,7 +36,6 @@ public class MarketPayProcessor extends AbstractPayProcessor {
         request.setTradeNo(payContext.getOutTradeNo());
         request.setTradeAmount(payContext.getOrderAmount());
         marketService.comfirmPay(request);
-
         return true;
     }
 
@@ -47,7 +45,6 @@ public class MarketPayProcessor extends AbstractPayProcessor {
         request.setTradeNo(payContext.getOutTradeNo());
         request.setTradeAmount(payContext.getOrderAmount());
         marketService.cancelPay(request);
-
         return true;
     }
 }

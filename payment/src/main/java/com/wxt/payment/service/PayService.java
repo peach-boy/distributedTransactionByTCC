@@ -14,7 +14,7 @@ public interface PayService {
 
     Boolean prePay(PayContext context);
 
-    Boolean pay(PayContext context);
+    Boolean doPay(PayContext context);
 
     Boolean postPay(PayContext context);
 

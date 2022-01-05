@@ -18,7 +18,7 @@ public class RedisConfig {
         Config config = new Config();
         config.setTransportMode(TransportMode.NIO);
         SingleServerConfig singleServerConfig = config.useSingleServer();
-        singleServerConfig.setAddress("redis://*:6379");
+        singleServerConfig.setAddress("redis://47.100.47.252:6379");
         RedissonClient redisson = Redisson.create(config);
         return redisson;
     }

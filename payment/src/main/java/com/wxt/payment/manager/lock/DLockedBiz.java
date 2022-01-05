@@ -1,4 +1,4 @@
-package com.wxt.payment.manager;
+package com.wxt.payment.manager.lock;
 
 @FunctionalInterface
 public interface DLockedBiz<T extends DLockedBizBaseContext> {

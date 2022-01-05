@@ -3,7 +3,7 @@ package com.wxt.payment.domain.entity;
 import java.util.Date;
 
 /**
- * @Description: TODO
+ * @Description: 数据库DO基类
  * @Auther: xiantao.wu
  * @Date: 2021/6/13 15:02
  * @Email:1414924381@qq.com

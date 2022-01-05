@@ -13,27 +13,26 @@ import java.util.List;
 /**
  * @Auther: ThomasWu
  * @Date: 2021/6/6 13:57
- * @Description:
+ * @Description:支付场景抽象类
  */
 public abstract class AbstractScene {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(AbstractScene.class);
 
-
     protected List<PayProcessor> payProcessorList = new ArrayList<>();
 
     abstract String sceneCode();
 
-    abstract void registerPayProcessor();
+    abstract void registerProcessor();
+
 
     @PostConstruct
     void init() {
-        this.registerPayProcessor();
+        this.registerProcessor();
     }
 
 
-    public Boolean doPay(PayContext payContext) {
-
+    public Boolean execute(PayContext payContext) {
         //try阶段
         int currentTryStage = 0;
         try {

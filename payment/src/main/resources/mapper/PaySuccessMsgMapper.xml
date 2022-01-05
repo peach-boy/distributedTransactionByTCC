@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxt.payment.domain.mapper.PaySuccessMsgMapper">
+    <sql id="columns">
+        payOrderNo,status,retryTimes
+    </sql>
+
+    <insert id="insert" parameterType="com.wxt.payment.domain.entity.PaySuccessMsgDO" keyProperty="id"
+            useGeneratedKeys="true">
+        insert into pay_success_msg
+        (payOrderNo,status,retryTimes)
+        values
+        (#{payOrderNo},#{status},#{retryTimes})
+    </insert>
+
+    <update id="updateStatus">
+        update pay_success_msg
+        set payStatus = #{newStatus}
+        where payOrderNo = #{payOrderNo} and payStatus=#{oldStatus}
+    </update>
+
+    <select id="increaseRetryTimes" >
+        update pay_success_msg
+        set retryTimes = retryTimes+1
+        where payOrderNo = #{payOrderNo}
+    </select>
+
+</mapper>

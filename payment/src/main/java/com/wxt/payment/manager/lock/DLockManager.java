@@ -1,4 +1,4 @@
-package com.wxt.payment.manager;
+package com.wxt.payment.manager.lock;
 
 
 import com.wxt.common.constant.ErrorCode;
@@ -12,32 +12,38 @@ import org.springframework.stereotype.Component;
 
 import java.util.concurrent.TimeUnit;
 
+/**
+ * 分布式锁
+ */
 @Component
 public class DLockManager {
-
     private static final Logger LOGGER = LoggerFactory.getLogger(DLockManager.class);
-
 
     @Autowired
     private RedissonClient redissonClient;
 
-
-    public void lockAround(DLockedBizBaseContext context,DLockedBiz dLockedBiz){
-        RLock lock = redissonClient.getLock("pay_lock_" + context.getLockKey());
-
-        //加锁
-        lock.lock(10, TimeUnit.SECONDS);
+    /**
+     * 加锁方法，DLockedBiz为锁定业务逻辑
+     *
+     * @param context
+     * @param dLockBaseInfo
+     * @param biz
+     */
+    public void lockBizAround(DLockedBizBaseContext context, DLockBaseInfo dLockBaseInfo, DLockedBiz biz) {
+        RLock lock = redissonClient.getLock(dLockBaseInfo.getLockPrefix() + "_" + context.getLockKey());
+        lock.lock(dLockBaseInfo.getLockTime(), dLockBaseInfo.getUnit());
 
         try {
+            //获取锁
             boolean result = lock.tryLock();
             if (!result) {
                 throw new BusinessRuntimeException(ErrorCode.DISTRIBUTE_LOCKING);
             }
 
-            dLockedBiz.execute(context);
-
+            //执行业务逻辑
+            biz.execute(context);
         } catch (Exception e) {
-            LOGGER.error("error:{}",e);
+            LOGGER.error("error:{}", e);
             throw e;
         } finally {
             //释放锁

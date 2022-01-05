@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 /**
  * @Auther: ThomasWu
  * @Date: 2021/6/6 13:56
- * @Description:
+ * @Description:额度支付场景
  */
 @Service
 public class LimitScene extends AbstractScene {
@@ -30,7 +30,7 @@ public class LimitScene extends AbstractScene {
     }
 
     @Override
-    void registerPayProcessor() {
+    void registerProcessor() {
         this.payProcessorList.add(accountPayProcessor);
         this.payProcessorList.add(limitPayProcessor);
         this.payProcessorList.add(marketPayProcessor);

@@ -1,6 +1,6 @@
 package com.wxt.payment.model;
 
-import com.wxt.payment.manager.DLockedBizBaseContext;
+import com.wxt.payment.manager.lock.DLockedBizBaseContext;
 
 import java.math.BigDecimal;
 
