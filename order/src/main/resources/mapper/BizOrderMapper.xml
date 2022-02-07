@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxt.order.domain.mapper.BizOrderMapper">
+    <sql id="columns">
+        outTradeNo,orderAmount,remark,status
+    </sql>
+
+    <insert id="insert" parameterType="com.wxt.order.domain.entity.BizOrderDO" keyProperty="id"
+            useGeneratedKeys="true">
+        insert into biz_order
+        (outTradeNo,orderAmount,remark,status)
+        values
+        (#{outTradeNo},#{orderAmount},#{remark},#{status})
+    </insert>
+
+    <update id="updateStatus">
+        update biz_order
+        set status = #{newStatus}
+        where outTradeNo = #{outTradeNo} and status=#{oldStatus}
+    </update>
+
+    <select id="getByOutTradeNo" resultType="com.wxt.order.domain.entity.BizOrderDO">
+        SELECT
+        <include refid="columns"/>
+        FROM
+        biz_order
+        WHERE
+        outTradeNo=#{outTradeNo}
+    </select>
+
+</mapper>

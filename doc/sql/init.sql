@@ -89,3 +89,6 @@ CREATE TABLE wxt_limit.`pay_record` (
                                         `timeModified` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,
                                         PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
+
+
+create DATABASE IF NOT EXISTS wxt_order;

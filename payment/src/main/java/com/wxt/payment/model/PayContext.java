@@ -9,7 +9,7 @@ import java.math.BigDecimal;
  * @Date: 2021/6/6 13:53
  * @Description:
  */
-public class PayContext extends DLockedBizBaseContext {
+public class PayContext extends DLockedBizBaseContext{
     private String userId;
 
     private String appId;

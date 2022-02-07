@@ -24,20 +24,9 @@ public class ThreadPoolManager extends ThreadPoolExecutor {
                 10,
                 10,
                 TimeUnit.SECONDS,
-                new LinkedBlockingDeque<>(10),
-                new CustomThreadFactory(),
+                new LinkedBlockingDeque<>(1000),
                 (r, e) -> LOGGER.error("触发拒绝策略：{}", e.getActiveCount()));
     }
-
-    static class CustomThreadFactory implements ThreadFactory {
-        private final AtomicInteger threadNumber = new AtomicInteger(1);
-
-        @Override
-        public Thread newThread(Runnable r) {
-            return new Thread("payment_thread_pool" + this.threadNumber.getAndIncrement());
-        }
-    }
-
 }
 
 

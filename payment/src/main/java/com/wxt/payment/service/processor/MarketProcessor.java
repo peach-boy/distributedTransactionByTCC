@@ -2,6 +2,8 @@ package com.wxt.payment.service.processor;
 
 import com.wxt.common.api.MarketService;
 import com.wxt.common.model.MarketPayRequest;
+import com.wxt.payment.manager.tcc.AbstractTCCProcessor;
+import com.wxt.payment.manager.tcc.TCCContext;
 import com.wxt.payment.model.PayContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,36 +16,36 @@ import org.springframework.stereotype.Component;
  * @Description:营销系统
  */
 @Component
-public class MarketPayProcessor extends AbstractPayProcessor {
+public class MarketProcessor extends AbstractPayProcessor {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MarketPayProcessor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(MarketProcessor.class);
 
     @Autowired
     private MarketService marketService;
 
     @Override
-    public Boolean doTryPay(PayContext payContext) {
+    public Boolean doTryPay(PayContext context) {
         MarketPayRequest request = new MarketPayRequest();
-        request.setTradeNo(payContext.getOutTradeNo());
-        request.setTradeAmount(payContext.getOrderAmount());
+        request.setTradeNo(context.getOutTradeNo());
+        request.setTradeAmount(context.getOrderAmount());
         marketService.tryPay(request);
         return true;
     }
 
     @Override
-    public Boolean doComfirmPay(PayContext payContext) {
+    public Boolean doComfirmPay(PayContext context) {
         MarketPayRequest request = new MarketPayRequest();
-        request.setTradeNo(payContext.getOutTradeNo());
-        request.setTradeAmount(payContext.getOrderAmount());
+        request.setTradeNo(context.getOutTradeNo());
+        request.setTradeAmount(context.getOrderAmount());
         marketService.comfirmPay(request);
         return true;
     }
 
     @Override
-    public Boolean doCancelPay(PayContext payContext) {
+    public Boolean doCancelPay(PayContext context) {
         MarketPayRequest request = new MarketPayRequest();
-        request.setTradeNo(payContext.getOutTradeNo());
-        request.setTradeAmount(payContext.getOrderAmount());
+        request.setTradeNo(context.getOutTradeNo());
+        request.setTradeAmount(context.getOrderAmount());
         marketService.cancelPay(request);
         return true;
     }

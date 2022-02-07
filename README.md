@@ -1,12 +1,12 @@
 # paymentCenterExample
 
 ## 实现
-1. 基于TCC实现的分布式事务 doing
-2. 基于RabbitMQ的可靠消息投递
-3. 基于RabbitMQ实现的延迟消息
-4. 基于redis的分布式锁
+1. 基于TCC实现的分布式事务    done
+2. 基于RabbitMQ的可靠消息投递 done
+3. 基于RabbitMQ实现的延迟消息 done
+4. 基于redis的分布式锁       done
 5. 基于reids的缓存
-6. 基于elasticJob+zookeeper的分布式定时任务
+6. 基于elasticJob+zookeeper的分布式定时任务 done
 
 ## 中间件
 1. redis

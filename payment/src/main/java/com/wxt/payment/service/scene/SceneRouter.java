@@ -16,20 +16,20 @@ import java.util.Map;
 public class SceneRouter {
 
     @Resource
-    private AbstractScene[] abstractSceneList;
+    private Scene[] abstractSceneList;
 
-    private static Map<String, AbstractScene> sceneMap;
+    private static Map<String, Scene> sceneMap;
 
     @PostConstruct
     private void init() {
         sceneMap = new HashMap<>();
-        for (AbstractScene scene : abstractSceneList) {
+        for (Scene scene : abstractSceneList) {
             sceneMap.put(scene.sceneCode(), scene);
         }
     }
 
-    public static AbstractScene getBySceneCode(String sceneCode) {
-        AbstractScene abstractScene = sceneMap.get(sceneCode);
+    public static Scene getBySceneCode(String sceneCode) {
+        Scene abstractScene = sceneMap.get(sceneCode);
         if (abstractScene == null) {
             throw new RuntimeException();
         }

@@ -1,6 +1,8 @@
 package com.wxt.payment.domain.entity;
 
 
+import com.wxt.common.domain.BaseDO;
+
 /**
  * @Description: 支付成功消息
  * @Auther: xiantao.wu

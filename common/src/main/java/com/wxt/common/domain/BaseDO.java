@@ -1,4 +1,4 @@
-package com.wxt.payment.domain.entity;
+package com.wxt.common.domain;
 
 import java.util.Date;
 
@@ -15,6 +15,7 @@ public class BaseDO {
     private Date timeCreated;
 
     private Date timeModified;
+
 
     public Integer getId() {
         return id;

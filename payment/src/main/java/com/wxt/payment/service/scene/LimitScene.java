@@ -1,11 +1,14 @@
 package com.wxt.payment.service.scene;
 
-import com.wxt.payment.model.Scene;
-import com.wxt.payment.service.processor.AccountPayProcessor;
-import com.wxt.payment.service.processor.LimitPayProcessor;
-import com.wxt.payment.service.processor.MarketPayProcessor;
+import com.wxt.payment.manager.tcc.TCCProcessor;
+import com.wxt.payment.service.processor.AccountProcessor;
+import com.wxt.payment.service.processor.LimitProcessor;
+import com.wxt.payment.service.processor.MarketProcessor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @Auther: ThomasWu
@@ -13,26 +16,28 @@ import org.springframework.stereotype.Service;
  * @Description:额度支付场景
  */
 @Service
-public class LimitScene extends AbstractScene {
+public class LimitScene extends Scene {
 
     @Autowired
-    private MarketPayProcessor marketPayProcessor;
+    private MarketProcessor marketPayProcessor;
 
     @Autowired
-    private AccountPayProcessor accountPayProcessor;
+    private AccountProcessor accountPayProcessor;
 
     @Autowired
-    private LimitPayProcessor limitPayProcessor;
+    private LimitProcessor limitPayProcessor;
 
     @Override
     String sceneCode() {
-        return Scene.LIMIT.getSceneCode();
+        return com.wxt.payment.model.Scene.LIMIT.getSceneCode();
     }
 
     @Override
-    void registerProcessor() {
-        this.payProcessorList.add(accountPayProcessor);
-        this.payProcessorList.add(limitPayProcessor);
-        this.payProcessorList.add(marketPayProcessor);
+    public List<TCCProcessor> registerProcessor() {
+        List<TCCProcessor> processorList = new ArrayList<>();
+        processorList.add(accountPayProcessor);
+        processorList.add(limitPayProcessor);
+        processorList.add(marketPayProcessor);
+        return processorList;
     }
 }

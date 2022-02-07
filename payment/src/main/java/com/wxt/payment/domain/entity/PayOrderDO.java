@@ -1,5 +1,7 @@
 package com.wxt.payment.domain.entity;
 
+import com.wxt.common.domain.BaseDO;
+
 import java.math.BigDecimal;
 import java.util.Date;
 

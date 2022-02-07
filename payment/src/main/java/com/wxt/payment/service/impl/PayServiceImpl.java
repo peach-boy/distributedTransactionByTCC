@@ -5,6 +5,7 @@ import com.wxt.common.constant.ErrorCode;
 import com.wxt.common.constant.PayStatusEnum;
 import com.wxt.common.constant.PaySuccessMsgStatus;
 import com.wxt.common.exception.BusinessRuntimeException;
+import com.wxt.common.helper.OrderNoGenerateHelper;
 import com.wxt.payment.domain.entity.PayOrderDO;
 import com.wxt.payment.domain.entity.PaySuccessMsgDO;
 import com.wxt.payment.domain.mapper.PayOrderMapper;
@@ -14,13 +15,14 @@ import com.wxt.payment.manager.ThreadPoolManager;
 import com.wxt.payment.model.PayContext;
 import com.wxt.payment.model.response.QueryPayStatusResponse;
 import com.wxt.payment.service.PayService;
-import com.wxt.payment.service.helper.OrderNoGenerateHelper;
 import com.wxt.payment.service.scene.SceneRouter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 
 /**
  * @Auther: ThomasWu
@@ -44,9 +46,6 @@ public class PayServiceImpl implements PayService {
     @Autowired
     private ThreadPoolManager threadPoolManager;
 
-    @Autowired
-    private OrderNoGenerateHelper orderNoGenerateHelper;
-
     @Override
     public void checkPay(PayContext context) {
         PayOrderDO payOrder = payOrderMapper.getByOutTradeNo(context.getOutTradeNo());
@@ -65,7 +64,7 @@ public class PayServiceImpl implements PayService {
         payOrderDO.setOutTradeNo(context.getOutTradeNo());
         payOrderDO.setRemark(context.getRemark());
         payOrderDO.setPayStatus(PayStatusEnum.WAIT_PAY.getStatus());
-        payOrderDO.setPayOrderNo(orderNoGenerateHelper.markePayOrderNo());
+        payOrderDO.setPayOrderNo(OrderNoGenerateHelper.markePayOrderNo());
         payOrderDO.setTradeAmount(context.getOrderAmount());
         payOrderMapper.insert(payOrderDO);
 
@@ -97,12 +96,14 @@ public class PayServiceImpl implements PayService {
         paySuccessMsgDO.setRetryTimes(0);
         paySuccessMsgMapper.insert(paySuccessMsgDO);
 
-        //threadPoolManager.submit(() -> {
-            LOGGER.info("send_payment_success_mq_payOrder:{}",context.getPayOrderNo());
+        threadPoolManager.submit(() -> {
+            LOGGER.info("send_payment_success_mq_payOrder:{}", context.getPayOrderNo());
             rabbitMQManager.send(JSON.toJSONString(context));
-       // });
+        });
 
-        // 异步线程通知外部应用
+        threadPoolManager.submit(() -> {
+            // 异步线程通知外部应用
+        });
         return Boolean.TRUE;
     }
 

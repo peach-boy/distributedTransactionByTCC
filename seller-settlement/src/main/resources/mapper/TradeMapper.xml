@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.wxt.sellersettlement.domain.mapper.TradeMapper">
+    <sql id="columns">
+        tradeNo,outTradeNo,tradeAmount,tradeType
+    </sql>
+
+    <insert id="insert" parameterType="com.wxt.sellersettlement.domain.entity.TradeDO" keyProperty="id"
+            useGeneratedKeys="true">
+        insert into trade
+        (tradeNo,outTradeNo,tradeAmount,tradeType)
+        values
+        (#{tradeNo},#{outTradeNo},#{tradeAmount},#{tradeType})
+    </insert>
+
+
+
+    <select id="getByOutTradeNo" resultType="com.wxt.sellersettlement.domain.entity.TradeDO">
+        SELECT
+        <include refid="columns"/>
+        FROM
+        pay_order
+        WHERE
+        outTradeNo=#{outTradeNo}
+    </select>
+
+</mapper>
